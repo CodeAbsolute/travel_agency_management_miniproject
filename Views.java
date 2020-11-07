@@ -25,6 +25,7 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class Views extends JFrame {
 
@@ -58,23 +59,23 @@ public class Views extends JFrame {
 	try {
 		 Class.forName("com.mysql.cj.jdbc.Driver");
 	     Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/travel_agency_management","root","1234");
-		PreparedStatement p1 = con.prepareStatement("select * from route where route_id= ?");
-		PreparedStatement p2 = con.prepareStatement("select * from route");
+		PreparedStatement p1 = con.prepareStatement("select * from route where route_id= ? and route_status = 'active'");
+		PreparedStatement p2 = con.prepareStatement("select * from route where route_status = 'active' ");
 		
-		PreparedStatement p3 = con.prepareStatement("select * from modes where mode_id= ?");
-		PreparedStatement p4 = con.prepareStatement("select * from modes ");
+		PreparedStatement p3 = con.prepareStatement("select * from modes where mode_id= ? and mode_status = 'active'");
+		PreparedStatement p4 = con.prepareStatement("select * from modes mode_status = 'active' ");
 		
-		PreparedStatement p5 = con.prepareStatement("select * from vehicle where vehicle_id= ?");
-		PreparedStatement p6 = con.prepareStatement("select * from vehicle");
+		PreparedStatement p5 = con.prepareStatement("select * from vehicle where vehicle_id= ? and vehicle_status = 'active'");
+		PreparedStatement p6 = con.prepareStatement("select * from vehicle where vehicle_status = 'active'");
 		
-		PreparedStatement p7 = con.prepareStatement("select * from user_1 where user_id= ?");
-		PreparedStatement p8 = con.prepareStatement("select * from user_1");
+		PreparedStatement p7 = con.prepareStatement("select * from user_1 where user_id= ? and user_status = 'active'");
+		PreparedStatement p8 = con.prepareStatement("select * from user_1  where user_status = 'active'");
 
-		PreparedStatement p9 = con.prepareStatement("select * from booking_details where booking_id= ?");
-		PreparedStatement p10 = con.prepareStatement("select * from booking_details");
+		PreparedStatement p9 = con.prepareStatement("select * from booking_details where booking_id= ? ");
+		PreparedStatement p10 = con.prepareStatement("select * from booking_details ");
 
-		PreparedStatement p11 = con.prepareStatement("select * from places where place_id= ?");
-		PreparedStatement p12 = con.prepareStatement("select * from places");
+		PreparedStatement p11 = con.prepareStatement("select * from places where place_id= ? and place_status = 'active'");
+		PreparedStatement p12 = con.prepareStatement("select * from places where place_status = 'active'");
 		
 
 		PreparedStatement p13 = con.prepareStatement("select * from customer where cust_id= ?");
@@ -271,17 +272,17 @@ public class Views extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(29, 308, 910, 272);
+		scrollPane.setViewportBorder(null);
+		scrollPane.setBounds(29, 308, 910, 203);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
+		table.setBackground(Color.WHITE);
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null},
 			},
 			new String[] {
-				"New column"
 			}
 		));
 		
